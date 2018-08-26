@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'widgets/image_list.dart';
 import 'models/image_model.dart';
 
 class App extends StatefulWidget {
@@ -12,22 +14,26 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
+  final String url = "https://jsonplaceholder.typicode.com/photos/";
   int counter = 0;
-  String url = "https://jsonplaceholder.typicode.com/photos/";
+  List<ImageModel> images = [];
 
   void fetchImage() async {
     counter++;
 
     var response = await http.get(url + "$counter");
     var image = ImageModel.fromJson(json.decode(response.body));
-    print(image);
+
+    setState(() {
+      images.add(image);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: Center(child: Text("$counter")),
+          body: ImageList(),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: fetchImage,
