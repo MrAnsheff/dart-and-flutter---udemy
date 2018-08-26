@@ -33,7 +33,7 @@ class AppState extends State<App> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: ImageList(),
+          body: ImageList(images),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: fetchImage,
