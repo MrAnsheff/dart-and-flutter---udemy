@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Dart",
-      "program": "lib/deck_of_cards.dart",
+      "program": "lib/streams.dart",
       "request": "launch",
       "type": "dart"
     }
