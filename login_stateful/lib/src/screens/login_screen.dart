@@ -32,7 +32,13 @@ class LoginScreenState extends State<LoginScreen> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-          labelText: "Email address", hintText: "you@example.com"),
+        labelText: "Email address",
+        hintText: "you@example.com",
+      ),
+      validator: (String value) {
+        //return null if valid or string with the error message
+        return value.contains("@") ? null : "Please enter a valid email";
+      },
     );
   }
 
@@ -43,6 +49,11 @@ class LoginScreenState extends State<LoginScreen> {
         labelText: "Password",
         hintText: "Password",
       ),
+      validator: (String value) {
+        return value.length >= 4
+            ? null
+            : "Pasword must be at least 4 characters";
+      },
     );
   }
 
@@ -51,7 +62,7 @@ class LoginScreenState extends State<LoginScreen> {
       child: Text("Submit!"),
       color: Colors.blue,
       onPressed: () {
-        formKey.currentState.reset();
+        if (formKey.currentState.validate()) formKey.currentState.reset();
       },
     );
   }
