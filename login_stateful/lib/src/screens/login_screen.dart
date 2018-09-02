@@ -31,7 +31,13 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   _passwordField() {
-    return Container();
+    return TextFormField(
+      obscureText: true,
+      decoration: InputDecoration(
+        labelText: "Password",
+        hintText: "Password",
+      ),
+    );
   }
 
   _submitButton() {
