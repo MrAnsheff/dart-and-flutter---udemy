@@ -6,22 +6,25 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
           margin: EdgeInsets.all(20.0),
           child: Form(
+              key: formKey,
               child: Column(
-            children: [
-              _emailField(),
-              _passwordField(),
-              Container(
-                margin: EdgeInsets.only(top: 25.0),
-              ),
-              _submitButton(),
-            ],
-          ))),
+                children: [
+                  _emailField(),
+                  _passwordField(),
+                  Container(
+                    margin: EdgeInsets.only(top: 25.0),
+                  ),
+                  _submitButton(),
+                ],
+              ))),
     );
   }
 
