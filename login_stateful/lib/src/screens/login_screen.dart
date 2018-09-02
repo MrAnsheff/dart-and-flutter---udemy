@@ -41,6 +41,9 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   _submitButton() {
-    return Container();
+    return RaisedButton(
+      child: Text("Submit!"),
+      onPressed: () {},
+    );
   }
 }
