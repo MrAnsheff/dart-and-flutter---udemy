@@ -24,6 +24,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   Widget _emailField() {
     return TextFormField(
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
           labelText: "Email address", hintText: "you@example.com"),
     );
