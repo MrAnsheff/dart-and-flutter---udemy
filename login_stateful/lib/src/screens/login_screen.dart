@@ -16,6 +16,9 @@ class LoginScreenState extends State<LoginScreen> {
             children: [
               _emailField(),
               _passwordField(),
+              Container(
+                margin: EdgeInsets.only(top: 25.0),
+              ),
               _submitButton(),
             ],
           ))),
