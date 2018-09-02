@@ -39,6 +39,9 @@ class LoginScreenState extends State<LoginScreen> {
         //return null if valid or string with the error message
         return value.contains("@") ? null : "Please enter a valid email";
       },
+      onSaved: (String value) {
+        print(value);
+      },
     );
   }
 
@@ -54,6 +57,9 @@ class LoginScreenState extends State<LoginScreen> {
             ? null
             : "Pasword must be at least 4 characters";
       },
+      onSaved: (String value) {
+        print(value);
+      },
     );
   }
 
@@ -62,7 +68,7 @@ class LoginScreenState extends State<LoginScreen> {
       child: Text("Submit!"),
       color: Colors.blue,
       onPressed: () {
-        if (formKey.currentState.validate()) formKey.currentState.reset();
+        if (formKey.currentState.validate()) formKey.currentState.save();
       },
     );
   }
