@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Dart",
-      "program": "lib/streams.dart",
+      "program": "lib/streams2.dart",
       "request": "launch",
       "type": "dart"
     }
