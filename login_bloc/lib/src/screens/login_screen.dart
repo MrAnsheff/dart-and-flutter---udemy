@@ -19,12 +19,18 @@ class LoginScreen extends StatelessWidget {
   }
 
   passwordField() {
-    return TextField(
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: "Password",
-        labelText: "Password",
-      ),
+    return StreamBuilder(
+      stream: bloc.password,
+      builder: (context, passwordSnapshot) {
+        return TextField(
+          obscureText: true,
+          decoration: InputDecoration(
+              hintText: "Password",
+              labelText: "Password",
+              errorText: passwordSnapshot.error),
+          onChanged: bloc.changePassword,
+        );
+      },
     );
   }
 
