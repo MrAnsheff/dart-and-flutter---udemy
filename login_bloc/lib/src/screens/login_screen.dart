@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import "../blocs/bloc.dart";
 
 class LoginScreen extends StatelessWidget {
   emailField() {
-    return TextField(
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        hintText: "you@example.com",
-        labelText: "Email address",
-      ),
+    return StreamBuilder(
+      stream: bloc.email,
+      builder: (context, emailSnapshot) {
+        return TextField(
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+              hintText: "you@example.com",
+              labelText: "Email address",
+              errorText: emailSnapshot.error),
+          onChanged: bloc.changeEmail,
+        );
+      },
     );
   }
 
