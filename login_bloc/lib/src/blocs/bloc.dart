@@ -11,4 +11,9 @@ class Bloc extends Object with Validators {
   Function(String) get changePassword => _passwordController.sink.add;
   Stream<String> get password =>
       _passwordController.stream.transform(validatePassword);
+
+  dispose() {
+    _emailController.close();
+    _passwordController.close();
+  }
 }
