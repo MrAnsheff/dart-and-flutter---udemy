@@ -19,13 +19,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       vsync: this,
     );
 
-    catAnimation = Tween(begin: 0.0, end: 100.0).animate(
+    catAnimation = Tween(begin: 0.0, end: 250.0).animate(
       CurvedAnimation(
         parent: catController,
         curve: Curves.easeIn,
       ),
     );
+  }
 
+  void opTap() {
+    catController.reset();
     catController.forward();
   }
 
@@ -35,7 +38,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Text("Animation"),
       ),
-      body: buildAnimation(),
+      body: GestureDetector(
+        child: buildAnimation(),
+        onTap: opTap,
+      ),
     );
   }
 
