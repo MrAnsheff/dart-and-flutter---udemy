@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
     print(catController.status);
 
-    catAnimation = Tween(begin: 0.0, end: 250.0).animate(
+    catAnimation = Tween(begin: 0.0, end: 100.0).animate(
       CurvedAnimation(
         parent: catController,
         curve: Curves.easeIn,
@@ -42,11 +42,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         title: Text("Animation"),
       ),
       body: GestureDetector(
-        child: Stack(
-          children: <Widget>[
-            buildAnimation(),
-            buildBox(),
-          ],
+        child: Center(
+          child: Stack(
+            children: <Widget>[
+              buildBox(),
+              buildAnimation(),
+            ],
+          ),
         ),
         onTap: opTap,
       ),
@@ -54,12 +56,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   buildBox() {
-    return Center(
-      child: Container(
-        height: 200.0,
-        width: 200.0,
-        color: Colors.brown,
-      ),
+    return Container(
+      height: 200.0,
+      width: 200.0,
+      color: Colors.brown,
     );
   }
 
@@ -68,8 +68,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       animation: catAnimation,
       child: Cat(),
       builder: (BuildContext context, Widget child) {
-        return Container(
-            child: child, margin: EdgeInsets.only(top: catAnimation.value));
+        return Positioned(
+          child: child,
+          bottom: catAnimation.value,
+          right: 0.0,
+          left: 0.0,
+        );
       },
     );
   }
