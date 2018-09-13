@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       duration: Duration(seconds: 2),
       vsync: this,
     );
+    print(catController.status);
 
     catAnimation = Tween(begin: 0.0, end: 250.0).animate(
       CurvedAnimation(
@@ -28,8 +29,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   void opTap() {
-    catController.reset();
-    catController.forward();
+    if (catController.status == AnimationStatus.completed)
+      catController.reverse();
+    else if (catController.status == AnimationStatus.dismissed)
+      catController.forward();
   }
 
   @override
