@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             children: <Widget>[
               buildAnimation(),
               buildBox(),
+              buildLeftFlap(),
             ],
           ),
         ),
@@ -60,6 +61,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       height: 200.0,
       width: 200.0,
       color: Colors.brown,
+    );
+  }
+
+  buildLeftFlap() {
+    return Transform.rotate(
+      alignment: Alignment.topLeft,
+      angle: 3.14 / 1.5,
+      child: Container(
+        height: 10.0,
+        width: 125.0,
+        color: Colors.red,
+      ),
     );
   }
 
