@@ -65,13 +65,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   buildLeftFlap() {
-    return Transform.rotate(
-      alignment: Alignment.topLeft,
-      angle: 3.14 / 1.5,
-      child: Container(
-        height: 10.0,
-        width: 125.0,
-        color: Colors.red,
+    return Positioned(
+      left: 8.0,
+      top: 7.0,
+      child: Transform.rotate(
+        alignment: Alignment.topLeft,
+        angle: 3.14 / 1.5,
+        child: Container(
+          height: 10.0,
+          width: 125.0,
+          color: Colors.brown,
+        ),
       ),
     );
   }
