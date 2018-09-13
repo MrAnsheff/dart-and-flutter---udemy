@@ -42,8 +42,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         title: Text("Animation"),
       ),
       body: GestureDetector(
-        child: buildAnimation(),
+        child: Stack(
+          children: <Widget>[
+            buildAnimation(),
+            buildBox(),
+          ],
+        ),
         onTap: opTap,
+      ),
+    );
+  }
+
+  buildBox() {
+    return Center(
+      child: Container(
+        height: 200.0,
+        width: 200.0,
+        color: Colors.brown,
       ),
     );
   }
