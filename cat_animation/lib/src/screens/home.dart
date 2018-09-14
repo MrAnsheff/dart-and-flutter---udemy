@@ -36,14 +36,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     boxAnimation = Tween(begin: 0.0, end: 3.14).animate(
       CurvedAnimation(
-        parent: catController,
+        parent: boxController,
         curve: Curves.linear,
       ),
     );
+
+    boxAnimation.addStatusListener((newStatus) {
+      if (newStatus == AnimationStatus.completed) {
+        boxController.repeat();
+      }
+    });
+
+    boxController.forward();
   }
 
   void opTap() {
-    boxController.forward();
     if (catController.status == AnimationStatus.completed) {
       catController.reverse();
     } else if (catController.status == AnimationStatus.dismissed) {
@@ -84,7 +91,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   buildLeftFlap() {
     return Positioned(
       left: 8.0,
-      top: 7.0,
+      top: 8.0,
       child: AnimatedBuilder(
         animation: boxAnimation,
         child: Container(
