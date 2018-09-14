@@ -81,6 +81,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               buildAnimation(),
               buildBox(),
               buildLeftFlap(),
+              buildRightFlap(),
             ],
           ),
         ),
@@ -131,6 +132,28 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           left: 0.0,
         );
       },
+    );
+  }
+
+  buildRightFlap() {
+    return Positioned(
+      right: 8.0,
+      top: 8.0,
+      child: AnimatedBuilder(
+        animation: boxAnimation,
+        child: Container(
+          height: 10.0,
+          width: 125.0,
+          color: Colors.brown,
+        ),
+        builder: (context, child) {
+          return Transform.rotate(
+            alignment: Alignment.topRight,
+            angle: boxAnimation.value,
+            child: child,
+          );
+        },
+      ),
     );
   }
 }
