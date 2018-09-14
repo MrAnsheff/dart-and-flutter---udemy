@@ -34,13 +34,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
 
     boxController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 400),
       vsync: this,
     );
 
     boxAnimation = Tween(
       begin: pi * 0.6,
-      end: pi * 0.67,
+      end: pi * 0.65,
     ).animate(
       CurvedAnimation(
         parent: boxController,
@@ -62,8 +62,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void opTap() {
     if (catController.status == AnimationStatus.completed) {
       catController.reverse();
+      boxController.forward();
     } else if (catController.status == AnimationStatus.dismissed) {
       catController.forward();
+      boxController.stop();
     }
   }
 
