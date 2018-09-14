@@ -149,7 +149,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         builder: (context, child) {
           return Transform.rotate(
             alignment: Alignment.topRight,
-            angle: boxAnimation.value,
+            angle: -boxAnimation.value,
             child: child,
           );
         },
