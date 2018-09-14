@@ -10,6 +10,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Animation<double> catAnimation;
   AnimationController catController;
 
+  Animation<double> boxAnimation;
+  AnimationController boxController;
+
   @override
   initState() {
     super.initState();
@@ -25,13 +28,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         curve: Curves.easeIn,
       ),
     );
+
+    boxController = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this,
+    );
+
+    boxAnimation = Tween(begin: 0.0, end: 3.14).animate(
+      CurvedAnimation(
+        parent: catController,
+        curve: Curves.linear,
+      ),
+    );
   }
 
   void opTap() {
-    if (catController.status == AnimationStatus.completed)
+    boxController.forward();
+    if (catController.status == AnimationStatus.completed) {
       catController.reverse();
-    else if (catController.status == AnimationStatus.dismissed)
+    } else if (catController.status == AnimationStatus.dismissed) {
       catController.forward();
+    }
   }
 
   @override
@@ -68,14 +85,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Positioned(
       left: 8.0,
       top: 7.0,
-      child: Transform.rotate(
-        alignment: Alignment.topLeft,
-        angle: 3.14 / 1.5,
+      child: AnimatedBuilder(
+        animation: boxAnimation,
         child: Container(
           height: 10.0,
           width: 125.0,
           color: Colors.brown,
         ),
+        builder: (context, child) {
+          return Transform.rotate(
+            alignment: Alignment.topLeft,
+            angle: boxAnimation.value,
+            child: child,
+          );
+        },
       ),
     );
   }
