@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/cat.dart';
+import "dart:math";
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,7 +23,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       vsync: this,
     );
 
-    catAnimation = Tween(begin: -15.0, end: -80.0).animate(
+    catAnimation = Tween(
+      begin: -15.0,
+      end: -80.0,
+    ).animate(
       CurvedAnimation(
         parent: catController,
         curve: Curves.easeIn,
@@ -34,7 +38,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       vsync: this,
     );
 
-    boxAnimation = Tween(begin: 0.0, end: 3.14).animate(
+    boxAnimation = Tween(
+      begin: pi * 0.6,
+      end: pi * 0.67,
+    ).animate(
       CurvedAnimation(
         parent: boxController,
         curve: Curves.linear,
@@ -43,7 +50,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     boxAnimation.addStatusListener((newStatus) {
       if (newStatus == AnimationStatus.completed) {
-        boxController.repeat();
+        boxController.reverse();
+      } else if (newStatus == AnimationStatus.dismissed) {
+        boxController.forward();
       }
     });
 
