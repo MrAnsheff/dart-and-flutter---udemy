@@ -1,16 +1,22 @@
 abstract class PowerPlant {
-  turnOn();
+  int maxKwHour;
+  turnOn(int minPower);
 }
 
 class NuclearPlant implements PowerPlant {
-  turnOn() {
-    print("Im a nuclear plant turning on");
+  int maxKwHour = 100;
+
+  turnOn(int minPower) {
+    print(
+        "Im a solar plant turning on at $minPower capacity. My max capacity is $maxKwHour");
   }
 }
 
 class SolarPlant implements PowerPlant {
-  turnOn() {
-    print("Im a solar plant turning on");
+  int maxKwHour = 150;
+  turnOn(int minPower) {
+    print(
+        "Im a solar plant turning on at $minPower capacity. My max capacity is $maxKwHour");
   }
 }
 
@@ -19,7 +25,7 @@ class PowerGrid {
 
   addPlant(PowerPlant plant) {
     connectedPlants.add(plant);
-    plant.turnOn();
+    plant.turnOn(200);
   }
 }
 
