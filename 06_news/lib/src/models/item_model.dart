@@ -55,6 +55,21 @@ class ItemModel {
         title = parsedJson["title"],
         descendants = parsedJson["descendants"];
 
+  ItemModel.fromAPI(Map<String, dynamic> parsedJson)
+      : id = parsedJson["id"],
+        deleted = parsedJson["deleted"],
+        type = parsedJson["type"],
+        by = parsedJson["by"],
+        time = parsedJson["time"],
+        text = parsedJson["text"],
+        dead = parsedJson["dead"],
+        parent = parsedJson["parent"],
+        kids = parsedJson["kids"],
+        url = parsedJson["url"],
+        score = parsedJson["score"],
+        title = parsedJson["title"],
+        descendants = parsedJson["descendants"];
+
   Map<String, dynamic> toMap() {
     return {
       "id": id,
