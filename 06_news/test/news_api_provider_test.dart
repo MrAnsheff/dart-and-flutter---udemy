@@ -31,7 +31,7 @@ void main() {
     newsApi.client = MockClient((request) async {
       final jsonMap = {
         "by": "dhouston",
-        "descendants": 71,
+        "descendants": 2,
         "id": 8863,
         "kids": [8952, 8876],
         "score": 111,
@@ -44,7 +44,7 @@ void main() {
     });
 
     final item = await newsApi.fetchItem(id);
-    // expect(item, isInstanceOf<ItemModel>());
+
     expect(item.id, 8863);
   });
 }
