@@ -48,4 +48,8 @@ class NewsDbProvider {
       return (onValue.length > 0) ? ItemModel.fromJson(onValue[0]) : null;
     });
   }
+
+  addItem(ItemModel item) {
+    return db.insert("Items", item.toMap());
+  }
 }
