@@ -26,9 +26,25 @@ void main() {
 
   test("fetchItem returns an ItemModel", () async {
     final id = 8863;
-    NewsApiProvider newsApiProvider = NewsApiProvider();
+    NewsApiProvider newsApi = NewsApiProvider();
 
-    final item = await newsApiProvider.fetchItem(id);
-    expect(item, isInstanceOf<ItemModel>());
+    newsApi.client = MockClient((request) async {
+      final jsonMap = {
+        "by": "dhouston",
+        "descendants": 71,
+        "id": 8863,
+        "kids": [8952, 8876],
+        "score": 111,
+        "time": 1175714200,
+        "title": "My YC app: Dropbox - Throw away your USB drive",
+        "type": "story",
+        "url": "http://www.getdropbox.com/u/2/screencast.html"
+      };
+      return Response(json.encode(jsonMap), 200);
+    });
+
+    final item = await newsApi.fetchItem(id);
+    // expect(item, isInstanceOf<ItemModel>());
+    expect(item.id, 8863);
   });
 }
