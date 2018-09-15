@@ -31,7 +31,7 @@ void main() {
         "by": "dhouston",
         "descendants": 2,
         "id": 8863,
-        "kids": [8952, 8876],
+        "kids": jsonEncode([8952, 8876]),
         "score": 111,
         "time": 1175714200,
         "title": "My YC app: Dropbox - Throw away your USB drive",

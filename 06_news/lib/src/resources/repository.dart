@@ -7,7 +7,7 @@ class Repository {
   NewsDbProvider dbProvider = NewsDbProvider();
   NewsApiProvider apiProvider = NewsApiProvider();
 
-  Future<List<int>> fetchTopIds() async => await apiProvider.fetchTopIds();
+  Future<List<int>> fetchTopIds() => apiProvider.fetchTopIds();
 
   Future<ItemModel> fetchItem(int id) async {
     var item = await dbProvider.fetchItem(id);
