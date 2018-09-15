@@ -37,4 +37,15 @@ class NewsDbProvider {
       },
     );
   }
+
+  Future<ItemModel> fetchItem(int id) async {
+    return await db.query(
+      "Items",
+      columns: null,
+      where: "id = ?",
+      whereArgs: [id],
+    ).then((List<Map<String, dynamic>> onValue) {
+      return (onValue.length > 0) ? ItemModel.fromJson(onValue[0]) : null;
+    });
+  }
 }

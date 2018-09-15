@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ItemModel {
   //The item's unique id.
   final int id;
@@ -47,7 +49,7 @@ class ItemModel {
         text = parsedJson["text"],
         dead = parsedJson["dead"],
         parent = parsedJson["parent"],
-        kids = parsedJson["kids"],
+        kids = jsonDecode(parsedJson["kids"]),
         url = parsedJson["url"],
         score = parsedJson["score"],
         title = parsedJson["title"],
