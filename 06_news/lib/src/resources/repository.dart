@@ -8,7 +8,9 @@ class Repository {
 
   Repository(this._sources, this._caches);
 
-  // Future<List<int>> fetchTopIds() => apiProvider.fetchTopIds();
+  Future<List<int>> fetchTopIds() async {
+    return null;
+  }
 
   Future<ItemModel> fetchItem(int id) async {
     ItemModel item;
