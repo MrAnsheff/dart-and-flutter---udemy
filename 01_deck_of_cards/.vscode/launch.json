@@ -6,7 +6,7 @@
   "configurations": [
     {
       "name": "Dart",
-      "program": "lib/streams2.dart",
+      "program": "lib/energy_grid.dart",
       "request": "launch",
       "type": "dart"
     }
