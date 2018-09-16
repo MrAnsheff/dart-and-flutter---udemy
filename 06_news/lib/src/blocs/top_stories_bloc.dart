@@ -7,10 +7,13 @@ import '../resources/news_db_provider.dart';
 import '../resources/repository.dart';
 
 class TopStoriesBloc {
+  Repository _repository;
+
   final _topIds = PublishSubject<List<int>>();
   Observable<List<int>> get topIds => _topIds.stream;
 
-  Repository _repository;
+  final _items = BehaviorSubject<int>();
+  Function(int) get fetchItems => _items.sink.add;
 
   TopStoriesBloc() {
     final _dbProvider = NewsDbProvider();
@@ -38,5 +41,6 @@ class TopStoriesBloc {
 
   void dispose() {
     _topIds.close();
+    _items.close();
   }
 }
