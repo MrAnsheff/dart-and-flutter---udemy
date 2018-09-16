@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:rxdart/rxdart.dart';
 import '../models/item_model.dart';
 import '../resources/news_api_provider.dart';
@@ -18,6 +20,10 @@ class TopStoriesBloc {
   void fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
+  }
+
+  Future<ItemModel> getItem(int id) async {
+    return await _repository.fetchItem(id);
   }
 
   void dispose() {

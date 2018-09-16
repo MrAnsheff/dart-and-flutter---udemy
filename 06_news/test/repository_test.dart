@@ -10,7 +10,7 @@ import "package:http/testing.dart";
 void main() {
   test('create repository', () async {
     NewsApiProvider apiProvider = NewsApiProvider();
-    NewsDbProvider dbProvider = NewsDbProvider();
+    // NewsDbProvider dbProvider = NewsDbProvider();
 
     Repository repository = Repository([apiProvider], []);
     ItemModel item = await repository.fetchItem(8863);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/item_model.dart';
 import '../blocs/top_stories_provider.dart';
 
 class NewsList extends StatelessWidget {
@@ -26,7 +27,15 @@ class NewsList extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data.length,
           itemBuilder: (BuildContext context, int index) {
-            return Text("id: ${snapshot.data[index]}");
+            return FutureBuilder(
+              future: bloc.getItem(snapshot.data[index]),
+              builder:
+                  (BuildContext context, AsyncSnapshot<ItemModel> snapshot) {
+                if ((snapshot.hasData) && (snapshot.data != null))
+                  return Text(snapshot.data.title);
+                return Container();
+              },
+            );
           },
         );
       },

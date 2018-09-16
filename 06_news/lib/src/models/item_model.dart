@@ -42,12 +42,12 @@ class ItemModel {
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : id = parsedJson["id"],
-        deleted = parsedJson["deleted"],
+        deleted = parsedJson["deleted"] ?? false,
         type = parsedJson["type"],
         by = parsedJson["by"],
         time = parsedJson["time"],
         text = parsedJson["text"],
-        dead = parsedJson["dead"],
+        dead = parsedJson["dead"] ?? false,
         parent = parsedJson["parent"],
         kids = jsonDecode(parsedJson["kids"]),
         url = parsedJson["url"],
@@ -57,12 +57,12 @@ class ItemModel {
 
   ItemModel.fromAPI(Map<String, dynamic> parsedJson)
       : id = parsedJson["id"],
-        deleted = parsedJson["deleted"],
+        deleted = parsedJson["deleted"] ?? false,
         type = parsedJson["type"],
         by = parsedJson["by"],
         time = parsedJson["time"],
         text = parsedJson["text"],
-        dead = parsedJson["dead"],
+        dead = parsedJson["dead"] ?? false,
         parent = parsedJson["parent"],
         kids = parsedJson["kids"],
         url = parsedJson["url"],
@@ -73,12 +73,12 @@ class ItemModel {
   Map<String, dynamic> toMap() {
     return {
       "id": id,
-      "deleted": deleted ? 1 : 0,
+      "deleted": deleted ? 0 : 1,
       "type": type,
       "by": by,
       "time": time,
       "text": text,
-      "dead": dead ? 1 : 0,
+      "dead": dead ? 0 : 1,
       "parent": parent,
       "kids": jsonEncode(kids),
       "url": url,
