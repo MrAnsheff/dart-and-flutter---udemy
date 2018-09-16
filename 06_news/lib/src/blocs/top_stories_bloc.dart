@@ -12,7 +12,7 @@ class TopStoriesBloc {
 
   TopStoriesBloc() {
     final _dbProvider = NewsDbProvider();
-    _repository = Repository([NewsApiProvider(), _dbProvider], [_dbProvider]);
+    _repository = Repository([_dbProvider, NewsApiProvider()], [_dbProvider]);
   }
 
   void fetchTopIds() async {
