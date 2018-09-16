@@ -14,10 +14,13 @@ class TopStoriesBloc {
 
   final _items = BehaviorSubject<int>();
   Function(int) get fetchItems => _items.sink.add;
+  Observable<Map<int, Future<ItemModel>>> items;
 
   TopStoriesBloc() {
     final _dbProvider = NewsDbProvider();
     _repository = Repository([_dbProvider, NewsApiProvider()], [_dbProvider]);
+
+    items = _items.stream.transform(_itemsTransformer());
   }
 
   void fetchTopIds() async {
