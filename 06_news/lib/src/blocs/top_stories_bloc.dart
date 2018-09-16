@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:rxdart/rxdart.dart';
+
 import '../models/item_model.dart';
 import '../resources/news_api_provider.dart';
 import '../resources/news_db_provider.dart';
@@ -24,6 +24,16 @@ class TopStoriesBloc {
 
   Future<ItemModel> getItem(int id) async {
     return await _repository.fetchItem(id);
+  }
+
+  _itemsTransformer() {
+    return ScanStreamTransformer(
+      (Map<int, Future<ItemModel>> cache, int id, index) {
+        cache[id] = _repository.fetchItem(id);
+        return cache;
+      },
+      <int, Future<ItemModel>>{},
+    );
   }
 
   void dispose() {
