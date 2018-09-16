@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "top_stories_bloc.dart";
+export "top_stories_bloc.dart";
 
 class TopStoriesProvider extends InheritedWidget {
   @override

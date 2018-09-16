@@ -9,7 +9,14 @@ class Repository {
   Repository(this._sources, this._caches);
 
   Future<List<int>> fetchTopIds() async {
-    return null;
+    List<int> result;
+    Source source;
+
+    for (source in _sources) {
+      result = await source.fetchTopIds();
+      if (result != null) break;
+    }
+    return result;
   }
 
   Future<ItemModel> fetchItem(int id) async {
