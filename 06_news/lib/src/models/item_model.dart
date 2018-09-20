@@ -42,12 +42,12 @@ class ItemModel {
 
   ItemModel.fromJson(Map<String, dynamic> parsedJson)
       : id = parsedJson["id"],
-        deleted = parsedJson["deleted"] ?? false,
+        deleted = parsedJson["deleted"] == 0 ? false : true,
         type = parsedJson["type"],
         by = parsedJson["by"],
         time = parsedJson["time"],
         text = parsedJson["text"],
-        dead = parsedJson["dead"] ?? false,
+        dead = parsedJson["dead"] == 0 ? false : true,
         parent = parsedJson["parent"],
         kids = jsonDecode(parsedJson["kids"]),
         url = parsedJson["url"],

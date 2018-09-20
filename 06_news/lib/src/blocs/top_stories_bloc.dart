@@ -21,9 +21,8 @@ class TopStoriesBloc {
       BehaviorSubject<Map<int, Future<ItemModel>>>();
 
   TopStoriesBloc() {
-    // final _dbProvider = NewsDbProvider();
-    // _repository = Repository([_dbProvider, NewsApiProvider()], [_dbProvider]);
-    _repository = Repository([NewsApiProvider()], []);
+    final _dbProvider = NewsDbProvider();
+    _repository = Repository([_dbProvider, NewsApiProvider()], [_dbProvider]);
 
     _items.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
   }
