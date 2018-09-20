@@ -30,7 +30,6 @@ class TopStoriesBloc {
   void fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
-    print(ids);
   }
 
   _itemsTransformer() {
