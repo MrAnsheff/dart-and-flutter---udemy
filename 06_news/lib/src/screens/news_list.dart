@@ -25,11 +25,16 @@ class NewsList extends StatelessWidget {
           return NewsListTileShimmer();
         }
 
-        return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              bloc.fetchItem(snapshot.data[index]);
-              return NewsListTile(itemId: snapshot.data[index]);
+        return RefreshIndicator(
+            child: ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  bloc.fetchItem(snapshot.data[index]);
+                  return NewsListTile(itemId: snapshot.data[index]);
+                }),
+            onRefresh: () async {
+              // await bloc.clearCache();
+              await bloc.fetchTopIds();
             });
       },
     );
