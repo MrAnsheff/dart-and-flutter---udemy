@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:news/src/widgets/news_list_tile_shimmer.dart';
 
 import '../models/item_model.dart';
 import '../blocs/top_stories_provider.dart';
@@ -17,7 +18,7 @@ class NewsListTile extends StatelessWidget {
       builder: (BuildContext context,
           AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
         if (!snapshot.hasData) {
-          return CircularProgressIndicator();
+          return NewsListTileShimmer();
         }
 
         return FutureBuilder(
@@ -25,7 +26,7 @@ class NewsListTile extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
             if (!itemSnapshot.hasData) {
-              return CircularProgressIndicator();
+              return NewsListTileShimmer();
             }
             return buildTile(context, itemSnapshot.data);
           },
