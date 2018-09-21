@@ -9,12 +9,19 @@ class Repository {
   Repository(this._sources, this._caches);
 
   Future<List<int>> fetchTopIds() async {
-    return null;
+    List<int> result;
+    Source source;
+
+    for (source in _sources) {
+      result = await source.fetchTopIds();
+      if (result != null) break;
+    }
+    return result;
   }
 
   Future<ItemModel> fetchItem(int id) async {
     ItemModel item;
-    Source source;
+    var source;
 
     for (source in _sources) {
       item = await source.fetchItem(id);
@@ -23,9 +30,17 @@ class Repository {
 
     if (item != null)
       for (var cache in _caches) {
-        cache.addItem(item);
+        if (cache != source) {
+          cache.addItem(item);
+        }
       }
     return item;
+  }
+
+  clearCache() async {
+    for (var cache in _caches) {
+      await cache.clear();
+    }
   }
 }
 
@@ -37,4 +52,6 @@ abstract class Source {
 
 abstract class Cache {
   Future<int> addItem(ItemModel item);
+
+  Future<int> clear();
 }

@@ -53,11 +53,17 @@ class NewsDbProvider implements Source, Cache {
     });
   }
 
-  Future<int> addItem(ItemModel item) => db.insert("Items", item.toMap());
+  Future<int> addItem(ItemModel item) => db.insert("Items", item.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.ignore);
 
   /// TODO: STORE AND FETCH TOP IDS
   @override
   Future<List<int>> fetchTopIds() {
     return null;
+  }
+
+  @override
+  Future<int> clear() {
+    return db.delete("Items");
   }
 }
