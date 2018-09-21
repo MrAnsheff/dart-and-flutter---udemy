@@ -15,10 +15,9 @@ class TopStoriesBloc {
   final _items = PublishSubject<int>();
   Function(int) get fetchItem => _items.sink.add;
 
-  Observable<Map<int, Future<ItemModel>>> get items => _itemsOutput.stream;
-
   final BehaviorSubject<Map<int, Future<ItemModel>>> _itemsOutput =
       BehaviorSubject<Map<int, Future<ItemModel>>>();
+  Observable<Map<int, Future<ItemModel>>> get items => _itemsOutput.stream;
 
   TopStoriesBloc() {
     final _dbProvider = NewsDbProvider();
@@ -46,5 +45,9 @@ class TopStoriesBloc {
     _topIds.close();
     _itemsOutput.close();
     _items.close();
+  }
+
+  void clearCache() {
+    _repository.clearCache();
   }
 }

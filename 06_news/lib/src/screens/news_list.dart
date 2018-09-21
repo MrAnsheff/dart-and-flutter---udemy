@@ -33,7 +33,7 @@ class NewsList extends StatelessWidget {
                   return NewsListTile(itemId: snapshot.data[index]);
                 }),
             onRefresh: () async {
-              // await bloc.clearCache();
+              await bloc.clearCache();
               await bloc.fetchTopIds();
             });
       },

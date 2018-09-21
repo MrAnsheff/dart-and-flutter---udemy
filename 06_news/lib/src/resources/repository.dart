@@ -36,6 +36,12 @@ class Repository {
       }
     return item;
   }
+
+  void clearCache() {
+    for (var cache in _caches) {
+      cache.clear();
+    }
+  }
 }
 
 abstract class Source {
@@ -46,4 +52,6 @@ abstract class Source {
 
 abstract class Cache {
   Future<int> addItem(ItemModel item);
+
+  void clear();
 }
