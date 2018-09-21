@@ -63,7 +63,7 @@ class NewsDbProvider implements Source, Cache {
   }
 
   @override
-  void clear() {
-    db.delete("Items");
+  Future<int> clear() {
+    return db.delete("Items");
   }
 }

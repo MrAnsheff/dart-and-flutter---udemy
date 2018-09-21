@@ -26,9 +26,10 @@ class TopStoriesBloc {
     _items.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
   }
 
-  void fetchTopIds() async {
+  fetchTopIds() async {
     final ids = await _repository.fetchTopIds();
     _topIds.sink.add(ids);
+    return ids;
   }
 
   _itemsTransformer() {
@@ -47,7 +48,7 @@ class TopStoriesBloc {
     _items.close();
   }
 
-  void clearCache() {
-    _repository.clearCache();
+  clearCache() {
+    return _repository.clearCache();
   }
 }
