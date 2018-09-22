@@ -17,9 +17,12 @@ class App extends StatelessWidget {
   Route onGenerateRoute(RouteSettings settings) {
     print("onGenerateRoute: ${settings.name}");
     return MaterialPageRoute(builder: (context) {
-      if (settings.name.startsWith("/news"))
-        return NewsDetail();
-      else {
+      if (settings.name.startsWith("/news")) {
+        var itemId = int.tryParse(
+            settings.name.substring(settings.name.lastIndexOf("/") + 1));
+
+        return NewsDetail(itemId);
+      } else {
         return NewsList();
       }
     });
