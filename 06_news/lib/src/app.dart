@@ -6,16 +6,13 @@ import 'screens/news_detail.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TopStoriesProvider(
-      child: MaterialApp(
-        title: "News!",
-        onGenerateRoute: onGenerateRoute,
-      ),
+    return MaterialApp(
+      title: "News!",
+      onGenerateRoute: onGenerateRoute,
     );
   }
 
   Route onGenerateRoute(RouteSettings settings) {
-    print("onGenerateRoute: ${settings.name}");
     return MaterialPageRoute(builder: (context) {
       if (settings.name.startsWith("/news")) {
         var itemId = int.tryParse(
@@ -23,7 +20,7 @@ class App extends StatelessWidget {
 
         return NewsDetail(itemId);
       } else {
-        return NewsList();
+        return TopStoriesProvider(child: NewsList());
       }
     });
   }

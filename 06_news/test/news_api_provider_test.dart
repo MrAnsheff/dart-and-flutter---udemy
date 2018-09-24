@@ -8,7 +8,7 @@ void main() {
   test('FetchTopIds returns a list of ids', () async {
     NewsApiProvider newsApiProvider = NewsApiProvider();
     final ids = await newsApiProvider.fetchTopIds();
-    expect(ids, isInstanceOf<List<int>>());
+    expect(ids.isNotEmpty, true);
   });
 
   test("Mocked FetchTopIds", () async {

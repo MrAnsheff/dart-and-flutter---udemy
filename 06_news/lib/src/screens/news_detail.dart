@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/src/blocs/comments_provider.dart';
 
 class NewsDetail extends StatelessWidget {
   final int itemId;
@@ -6,11 +7,17 @@ class NewsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Detail"),
+    // final bloc = CommentsProvider.of(context);
+    // bloc.fetchItemWithComments(itemId);
+
+    return CommentsProvider(
+      itemId,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Detail"),
+        ),
+        body: Text("Details screen. Item $itemId"),
       ),
-      body: Text("Details screen. Item $itemId"),
     );
   }
 }
