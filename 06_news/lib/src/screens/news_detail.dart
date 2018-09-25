@@ -22,6 +22,18 @@ class NewsDetail extends StatelessWidget {
     return Text("Loading... $itemId");
   }
 
+  buildTitle(String title) {
+    return Container(
+        child: Text(
+      title,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    ));
+  }
+
   buildBody(BuildContext context) {
     final bloc = CommentsProvider.of(context);
     return StreamBuilder(
@@ -39,7 +51,7 @@ class NewsDetail extends StatelessWidget {
               return buildLoading();
             else {
               if (itemSnapshot.data != null)
-                return Text(itemSnapshot.data.title);
+                return buildTitle(itemSnapshot.data.title);
             }
             return buildLoading();
           },
