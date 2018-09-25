@@ -18,12 +18,16 @@ class NewsDetail extends StatelessWidget {
     );
   }
 
+  buildLoading() {
+    return Text("Loading... $itemId");
+  }
+
   buildBody(BuildContext context) {
     final bloc = CommentsProvider.of(context);
     return StreamBuilder(
       stream: bloc.itemWithComments,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
-        if (!snapshot.hasData) return Text("Loading...");
+        if (!snapshot.hasData) return buildLoading();
 
         final itemFuture = snapshot.data[itemId];
 
@@ -32,12 +36,12 @@ class NewsDetail extends StatelessWidget {
           builder:
               (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
             if (!snapshot.hasData)
-              return Text("Loading...");
+              return buildLoading();
             else {
               if (itemSnapshot.data != null)
                 return Text(itemSnapshot.data.title);
             }
-            return Text("Loading...");
+            return buildLoading();
           },
         );
       },
