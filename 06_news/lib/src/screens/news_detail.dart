@@ -24,14 +24,16 @@ class NewsDetail extends StatelessWidget {
 
   buildTitle(String title) {
     return Container(
+        alignment: Alignment.topCenter,
+        margin: EdgeInsets.all(5.0),
         child: Text(
-      title,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontSize: 20.0,
-        fontWeight: FontWeight.bold,
-      ),
-    ));
+          title,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ));
   }
 
   buildBody(BuildContext context) {
