@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:news/src/widgets/news_list_tile_shimmer.dart';
-
-import '../models/item_model.dart';
 import '../blocs/top_stories_provider.dart';
+import '../models/item_model.dart';
+import 'news_list_tile_shimmer.dart';
 
 class NewsListTile extends StatelessWidget {
   final int itemId;

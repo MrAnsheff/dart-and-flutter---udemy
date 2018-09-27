@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:news/src/blocs/comments_provider.dart';
-import 'package:news/src/models/item_model.dart';
+import '../blocs/comments_provider.dart';
+import '../models/item_model.dart';
 
 class NewsDetail extends StatelessWidget {
   final int itemId;
@@ -10,12 +10,16 @@ class NewsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Detail"),
-      ),
-      body: buildBody(context),
-    );
+    final bloc = CommentsProvider.of(context);
+    if (bloc == null)
+      return Container();
+    else
+      return Scaffold(
+        appBar: AppBar(
+          title: Text("Detail"),
+        ),
+        body: buildBody(bloc),
+      );
   }
 
   buildLoading() {
@@ -36,8 +40,7 @@ class NewsDetail extends StatelessWidget {
         ));
   }
 
-  buildBody(BuildContext context) {
-    final bloc = CommentsProvider.of(context);
+  buildBody(bloc) {
     return StreamBuilder(
       stream: bloc.itemWithComments,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
