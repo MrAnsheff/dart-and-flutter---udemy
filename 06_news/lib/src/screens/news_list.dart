@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/widgets/news_list_tile_shimmer.dart';
+import '../widgets/news_list_tile_shimmer.dart';
 import '../widgets/news_list_tile.dart';
-
 import '../blocs/top_stories_provider.dart';
 
 class NewsList extends StatelessWidget {

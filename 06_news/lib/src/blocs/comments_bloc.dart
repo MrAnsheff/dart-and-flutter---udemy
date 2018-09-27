@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'package:rxdart/rxdart.dart';
+import 'package:kiwi/kiwi.dart';
 import '../models/item_model.dart';
 import '../resources/repository.dart';
-import '../resources/news_api_provider.dart';
-// import '../resources/news_db_provider.dart';
 
 class CommentsBloc {
+  Repository _repository;
+
   final _commentsFetcher = PublishSubject<int>();
   final _commentsOutput = BehaviorSubject<Map<int, Future<ItemModel>>>();
-
-  final _repository = Repository([NewsApiProvider()], []);
 
   Observable<Map<int, Future<ItemModel>>> get itemWithComments =>
       _commentsOutput.stream;
@@ -17,10 +16,8 @@ class CommentsBloc {
   Function(int) get fetchItemWithComments => _commentsFetcher.sink.add;
 
   CommentsBloc() {
-    print("COMMENTS BLOC");
-    // final _dbProvider = NewsDbProvider();
-    // _repository = Repository([_dbProvider, NewsApiProvider()], [_dbProvider]);
-    // _repository = Repository([NewsApiProvider()], []);
+    final container = Container();
+    _repository = container<Repository>();
 
     _commentsFetcher.stream
         .transform(_commentsTransformer())
