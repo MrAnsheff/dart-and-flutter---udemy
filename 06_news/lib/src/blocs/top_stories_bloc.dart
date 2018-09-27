@@ -1,8 +1,7 @@
 import 'dart:async';
-
-import '../resources/news_api_provider.dart';
-import '../resources/news_db_provider.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:rxdart/rxdart.dart';
+
 import '../models/item_model.dart';
 import '../resources/repository.dart';
 
@@ -20,8 +19,8 @@ class TopStoriesBloc {
   Observable<Map<int, Future<ItemModel>>> get items => _itemsOutput.stream;
 
   TopStoriesBloc() {
-    final _dbProvider = NewsDbProvider();
-    _repository = Repository([_dbProvider, NewsApiProvider()], [_dbProvider]);
+    final container = Container();
+    _repository = container<Repository>();
 
     _items.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
   }

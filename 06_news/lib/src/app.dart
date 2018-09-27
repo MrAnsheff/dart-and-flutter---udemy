@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:news/src/blocs/comments_bloc.dart';
-import 'package:news/src/blocs/comments_provider.dart';
-import 'blocs/top_stories_provider.dart';
+
 import 'screens/news_list.dart';
+import 'blocs/top_stories_provider.dart';
+
 import 'screens/news_detail.dart';
+import 'blocs/comments_provider.dart';
+
+import 'resources/injector.dart' as injector;
 
 class App extends StatelessWidget {
+  App() {
+    injector.setup();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
