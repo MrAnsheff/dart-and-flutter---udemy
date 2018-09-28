@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../widgets/news_list_tile_shimmer.dart';
+import '../widgets/comment.dart';
 import '../blocs/comments_provider.dart';
 import '../models/item_model.dart';
 
@@ -61,7 +61,7 @@ class NewsDetail extends StatelessWidget {
                   children: [
                     buildTitle(itemSnapshot.data.title),
                     buildAuthor(itemSnapshot.data.by),
-                    buildComments(bloc, itemSnapshot.data.kids, snapshot.data),
+                    buildComments(itemSnapshot.data.kids ?? [], snapshot.data),
                   ],
                 );
             }
@@ -72,34 +72,9 @@ class NewsDetail extends StatelessWidget {
     );
   }
 
-  buildComments(bloc, List kids, Map<int, Future<ItemModel>> cache) {
+  buildComments(List kids, Map<int, Future<ItemModel>> cache) {
     final result = kids.map<Widget>((kid) {
-      return FutureBuilder(
-        future: cache[kid],
-        builder: (context, AsyncSnapshot<ItemModel> snapshot) {
-          if (!snapshot.hasData) {
-            return NewsListTileShimmer();
-          }
-
-          final item = snapshot.data;
-
-          final children = <Widget>[
-            ListTile(
-              title: buildText(item.text),
-              subtitle: item.by == "" ? Text("Deleted") : Text(item.by),
-              contentPadding: EdgeInsets.only(
-                right: 16.0,
-                left: 16.0,
-              ),
-            ),
-            Divider(),
-          ];
-
-          return Column(
-            children: children,
-          );
-        },
-      );
+      return Comment(cache[kid]);
     }).toList();
 
     return Column(
@@ -107,22 +82,12 @@ class NewsDetail extends StatelessWidget {
     );
   }
 
-  buildText(String text) {
-    return Container(
-        alignment: Alignment.topCenter,
-        margin: EdgeInsets.all(5.0),
-        child: Text(
-          text,
-          textAlign: TextAlign.justify,
-        ));
-  }
-
   buildAuthor(String author) {
     return Container(
         alignment: Alignment.topLeft,
         margin: EdgeInsets.only(left: 15.0),
         child: Text(
-          "by: $author",
+          author == "" ? "Deleted" : "by: $author",
           textAlign: TextAlign.left,
           style: TextStyle(
             fontSize: 20.0,
