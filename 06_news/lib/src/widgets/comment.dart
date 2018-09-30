@@ -19,7 +19,6 @@ class Comment extends StatelessWidget {
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(5.0),
       child: Html(data: text),
-      // child: Text(text),
     );
   }
 
