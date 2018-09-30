@@ -41,7 +41,7 @@ class NewsDetail extends StatelessWidget {
         ));
   }
 
-  buildBody(bloc) {
+  buildBody(CommentsBloc bloc) {
     return StreamBuilder(
       stream: bloc.itemWithComments,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
@@ -74,7 +74,7 @@ class NewsDetail extends StatelessWidget {
 
   buildComments(List kids, Map<int, Future<ItemModel>> cache) {
     final result = kids.map<Widget>((kid) {
-      return Comment(cache[kid]);
+      return Comment(kid);
     }).toList();
 
     return Column(

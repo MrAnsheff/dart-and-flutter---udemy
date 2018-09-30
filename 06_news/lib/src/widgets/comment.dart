@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../blocs/comments_provider.dart';
 import '../widgets/news_list_tile_shimmer.dart';
 import '../models/item_model.dart';
 
 class Comment extends StatelessWidget {
-  final Future<ItemModel> comment;
-  Comment(this.comment);
+  final int depth;
+  final int itemId;
+
+  Comment(this.itemId) : depth = 0;
+  Comment._reply(this.itemId, this.depth);
 
   buildText(String text) {
     return Container(
@@ -18,32 +22,55 @@ class Comment extends StatelessWidget {
         ));
   }
 
+  buildLoading() {
+    return Text("Loading... $itemId");
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return FutureBuilder(
-      future: comment,
-      builder: (context, AsyncSnapshot<ItemModel> snapshot) {
-        if (!snapshot.hasData) {
-          return NewsListTileShimmer();
-        }
+    final bloc = CommentsProvider.of(context);
+    if (bloc == null) return Container();
+    bloc.fetchItemWithComments(itemId);
 
-        final item = snapshot.data;
+    return StreamBuilder(
+      stream: bloc.itemWithComments,
+      builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
+        if (!snapshot.hasData) return buildLoading();
 
-        final children = <Widget>[
-          ListTile(
-            title: buildText(item.text ?? ""),
-            subtitle: item.by == "" ? Text("Deleted") : Text("by: ${item.by}"),
-            contentPadding: EdgeInsets.only(
-              right: 16.0,
-              left: 16.0,
-            ),
-          ),
-          Divider(),
-        ];
+        final itemFuture = snapshot.data[itemId];
 
-        return Column(
-          children: children,
+        return FutureBuilder(
+          future: itemFuture,
+          builder:
+              (BuildContext context, AsyncSnapshot<ItemModel> itemSnapshot) {
+            if (!snapshot.hasData)
+              return buildLoading();
+            else {
+              if (itemSnapshot.data != null) {
+                final children = <Widget>[
+                  ListTile(
+                    title: buildText(itemSnapshot.data.text ?? ""),
+                    subtitle: itemSnapshot.data.by == ""
+                        ? Text("Deleted")
+                        : Text("by: ${itemSnapshot.data.by}"),
+                    contentPadding: EdgeInsets.only(
+                      right: 16.0,
+                      left: (depth * 1) * 16.0,
+                    ),
+                  ),
+                  Divider(),
+                ];
+                // itemSnapshot.data.kids.forEach((kid) {
+                //   children.add(Comment._reply(kid, depth + 1));
+                // });
+
+                return Column(
+                  children: children,
+                );
+              }
+            }
+            return buildLoading();
+          },
         );
       },
     );
