@@ -19,6 +19,7 @@ class Comment extends StatelessWidget {
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(5.0),
       child: Html(data: text),
+      // child: Text(text),
     );
   }
 
@@ -49,7 +50,7 @@ class Comment extends StatelessWidget {
                 final children = <Widget>[
                   ListTile(
                     title: buildText(itemSnapshot.data.text ?? ""),
-                    subtitle: itemSnapshot.data.by == ""
+                    subtitle: itemSnapshot.data.by == null
                         ? Text("Deleted")
                         : Text("by: ${itemSnapshot.data.by}"),
                     contentPadding: EdgeInsets.only(
