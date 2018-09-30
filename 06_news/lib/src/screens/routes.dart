@@ -12,7 +12,7 @@ var _homeHandler =
 
 var _newsDetailHandler =
     Handler(handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-  final itemId = params["itemId"][0];
+  final itemId = int.tryParse(params["itemId"][0]);
   return CommentsProvider(itemId, child: NewsDetail(itemId));
 });
 
