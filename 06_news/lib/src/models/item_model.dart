@@ -92,7 +92,7 @@ class ItemModel {
   static _cleanText(parsedJson) {
     if (parsedJson == null) return null;
 
-    var unescape = new HtmlUnescape();
+    var unescape = HtmlUnescape();
     return unescape.convert(parsedJson);
   }
 }
