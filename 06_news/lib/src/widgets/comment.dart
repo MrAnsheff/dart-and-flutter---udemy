@@ -23,7 +23,7 @@ class Comment extends StatelessWidget {
   }
 
   buildLoading() {
-    return Text("Loading... $itemId");
+    return NewsListTileShimmer(leftMargin: depth * 16.0);
   }
 
   @override
