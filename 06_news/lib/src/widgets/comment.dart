@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+
 import '../blocs/comments_provider.dart';
 import '../widgets/news_list_tile_shimmer.dart';
 import '../models/item_model.dart';
@@ -14,12 +16,10 @@ class Comment extends StatelessWidget {
 
   buildText(String text) {
     return Container(
-        alignment: Alignment.topCenter,
-        margin: EdgeInsets.all(5.0),
-        child: Text(
-          text,
-          textAlign: TextAlign.justify,
-        ));
+      alignment: Alignment.topCenter,
+      margin: EdgeInsets.all(5.0),
+      child: Html(data: text),
+    );
   }
 
   buildLoading() {

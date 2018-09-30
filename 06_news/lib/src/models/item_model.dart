@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:html_unescape/html_unescape.dart';
 
 class ItemModel {
   //The item's unique id.
@@ -61,7 +62,7 @@ class ItemModel {
         type = parsedJson["type"],
         by = parsedJson["by"],
         time = parsedJson["time"],
-        text = parsedJson["text"],
+        text = _cleanText(parsedJson["text"]),
         dead = parsedJson["dead"] ?? false,
         parent = parsedJson["parent"],
         kids = parsedJson["kids"] ?? [],
@@ -86,5 +87,12 @@ class ItemModel {
       "title": title,
       "descendants": descendants,
     };
+  }
+
+  static _cleanText(parsedJson) {
+    if (parsedJson == null) return null;
+
+    var unescape = new HtmlUnescape();
+    return unescape.convert(parsedJson);
   }
 }
