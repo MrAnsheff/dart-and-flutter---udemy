@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class NewsListTileShimmer extends StatelessWidget {
+  final double leftMargin;
+
+  const NewsListTileShimmer({this.leftMargin = 0.0});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +25,7 @@ class NewsListTileShimmer extends StatelessWidget {
       color: Colors.grey[200],
       height: 24.0,
       width: 150.0,
-      margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+      margin: EdgeInsets.only(top: 5.0, bottom: 5.0, left: leftMargin),
     );
   }
 }

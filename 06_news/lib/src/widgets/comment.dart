@@ -23,14 +23,13 @@ class Comment extends StatelessWidget {
   }
 
   buildLoading() {
-    return Text("Loading... $itemId");
+    return NewsListTileShimmer(leftMargin: depth * 16.0);
   }
 
   @override
   Widget build(BuildContext context) {
     final bloc = CommentsProvider.of(context);
     if (bloc == null) return Container();
-    bloc.fetchItemWithComments(itemId);
 
     return StreamBuilder(
       stream: bloc.itemWithComments,
@@ -55,14 +54,14 @@ class Comment extends StatelessWidget {
                         : Text("by: ${itemSnapshot.data.by}"),
                     contentPadding: EdgeInsets.only(
                       right: 16.0,
-                      left: (depth * 1) * 16.0,
+                      left: depth * 16.0,
                     ),
                   ),
                   Divider(),
                 ];
-                // itemSnapshot.data.kids.forEach((kid) {
-                //   children.add(Comment._reply(kid, depth + 1));
-                // });
+                itemSnapshot.data.kids.forEach((kid) {
+                  children.add(Comment._reply(kid, depth + 1));
+                });
 
                 return Column(
                   children: children,
