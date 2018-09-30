@@ -17,10 +17,7 @@ class App extends StatelessWidget {
     // Define home page.
     router.define(
       '/',
-      handler: Handler(
-          handlerFunc: (BuildContext context, Map<String, dynamic> params) {
-        return TopStoriesProvider(child: NewsList());
-      }),
+      handler: routes.homeHandler,
     );
 
     router.define('/news/:itemId', handler: Handler(
