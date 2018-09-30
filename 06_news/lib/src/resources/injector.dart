@@ -13,10 +13,12 @@ abstract class Injector {
   }
 
   void _configureInstances() {
-    final dbProvider = NewsDbProvider();
-    Container container = Container();
-    container.registerInstance(
-      Repository([dbProvider, NewsApiProvider()], [dbProvider]),
+    Container().registerInstance(
+      Repository([
+        NewsApiProvider(),
+      ], [
+        NewsDbProvider(),
+      ]),
     );
   }
 
