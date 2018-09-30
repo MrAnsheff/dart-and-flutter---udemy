@@ -23,6 +23,7 @@ class TopStoriesBloc {
     _repository = container<Repository>();
 
     _items.stream.transform(_itemsTransformer()).pipe(_itemsOutput);
+    fetchTopIds();
   }
 
   fetchTopIds() async {
