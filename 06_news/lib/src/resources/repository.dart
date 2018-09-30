@@ -19,22 +19,41 @@ class Repository {
     return result;
   }
 
-  Future<ItemModel> fetchItem(int id) async {
-    ItemModel item;
-    var source;
-
-    for (source in _sources) {
-      item = await source.fetchItem(id);
-      if (item != null) break;
+  void _addItemToCache(ItemModel item) {
+    for (var cache in _caches) {
+      cache.addItem(item);
     }
+  }
 
-    if (item != null)
-      for (var cache in _caches) {
-        if (cache != source) {
-          cache.addItem(item);
-        }
-      }
-    return item;
+  Future<ItemModel> fetchItem(int id) async {
+    ItemModel result;
+
+    result = await _fetchItemFromCaches(id);
+    if (result != null) return result;
+
+    result = await _fetchItemFromSources(id);
+
+    if (result != null) _addItemToCache(result);
+
+    return result;
+  }
+
+  Future<ItemModel> _fetchItemFromCaches(int id) async {
+    ItemModel result;
+    for (var cache in _caches) {
+      result = await cache.fetchItem(id);
+      if (result != null) break;
+    }
+    return result;
+  }
+
+  Future<ItemModel> _fetchItemFromSources(int id) async {
+    ItemModel result;
+    for (var source in _sources) {
+      result = await source.fetchItem(id);
+      if (result != null) break;
+    }
+    return result;
   }
 
   clearCache() async {
@@ -51,6 +70,8 @@ abstract class Source {
 }
 
 abstract class Cache {
+  Future<ItemModel> fetchItem(int id);
+
   Future<int> addItem(ItemModel item);
 
   Future<int> clear();
