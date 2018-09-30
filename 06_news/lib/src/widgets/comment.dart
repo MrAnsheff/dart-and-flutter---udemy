@@ -54,7 +54,7 @@ class Comment extends StatelessWidget {
                         : Text("by: ${itemSnapshot.data.by}"),
                     contentPadding: EdgeInsets.only(
                       right: 16.0,
-                      left: depth * 16.0,
+                      left: (depth + 1) * 16.0,
                     ),
                   ),
                   Divider(),
