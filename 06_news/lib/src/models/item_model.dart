@@ -50,7 +50,7 @@ class ItemModel {
         text = parsedJson["text"],
         dead = parsedJson["dead"] == 0 ? false : true,
         parent = parsedJson["parent"],
-        kids = jsonDecode(parsedJson["kids"]),
+        kids = parsedJson["kids"] == null ? [] : jsonDecode(parsedJson["kids"]),
         url = parsedJson["url"],
         score = parsedJson["score"],
         title = parsedJson["title"],
