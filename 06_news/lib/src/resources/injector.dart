@@ -1,5 +1,6 @@
 import 'package:kiwi/kiwi.dart';
 
+import 'news_firestore_provider.dart';
 import 'news_api_provider.dart';
 import 'news_db_provider.dart';
 import "repository.dart";
@@ -17,6 +18,7 @@ abstract class Injector {
       Repository([
         NewsApiProvider(),
       ], [
+        NewsFirestoreProvider(),
         NewsDbProvider(),
       ]),
     );
