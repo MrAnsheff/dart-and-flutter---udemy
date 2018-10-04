@@ -24,11 +24,8 @@ class NewsFirestoreProvider implements Cache {
   @override
   Future<int> clear() {
     var totalDeleted = 0;
-    _firestore.runTransaction((Transaction transactionHandler) async {
-      await _firestore
-          .collection(_path)
-          .snapshots()
-          .forEach((querySnapshot) async {
+    _firestore.runTransaction((Transaction transactionHandler) {
+      _firestore.collection(_path).getDocuments().then((querySnapshot) {
         totalDeleted = querySnapshot.documents.length;
 
         querySnapshot.documents.forEach((DocumentSnapshot doc) {
